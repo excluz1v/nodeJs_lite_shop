@@ -1,0 +1,17 @@
+include header
+
+div(class='wrap')
+    div(class='content')
+        header(class='site-header')
+            include site_header.pug
+        div(class='container')
+            div(class='row')
+                div(class='col col-md-12')
+                    h2(class='panel-title') #{goods[0]['name']}
+                div(class='col col-md-4')
+                    img(src='images/'+goods[0]['image']
+                    class='goods-bg-image')
+                div(class='col col-md-8')
+                    p #{goods[0]['description']}
+                    span(class='success') Цена: #{goods[0]['cost']} RUB
+                    button(class='button button-success add-to-card' data-goods_id=goods[0]['id']) to card

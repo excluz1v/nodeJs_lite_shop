@@ -1,0 +1,39 @@
+h2 {
+  font-size: 30px;
+  color: red;
+}
+.wrap {
+  background: #fff;
+  display: flex;
+flex-direction: column;
+height: 100%;
+}
+.conternt {
+  flex-grow: 1;
+  flex-shrink: 0;
+}
+.text-center {
+  text-align: center;
+}
+
+.site-header {
+  height: auto;
+  padding: 20px 0;
+}
+.site-header h1 {
+  display: inline-block;
+}
+.full-width {
+  width: 100%;
+  margin: 0 auto;
+padding: 0;
+}
+.card {
+  border: 1px solid #dedede;
+}
+.card-image {
+  display: block;
+  margin: 20px auto;
+  max-width: 90%;
+  min-height: 150px;
+}

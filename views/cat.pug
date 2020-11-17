@@ -1,0 +1,12 @@
+include header
+
+div(class='wrap')
+    div(class='content')
+        header(class='site-header')
+            include site_header.pug
+        div(class='container')
+            div(class='row')
+                div(class='col col-md-12')
+                    h2 #{cat[0]['category']}
+                each val,index in goods
+                    include card
