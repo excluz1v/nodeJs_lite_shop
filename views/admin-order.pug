@@ -1,0 +1,24 @@
+table
+    tr
+        th id
+        th user id
+        th goods id
+        th goods Cost
+        th goods amount
+        th total
+        th Date
+        th user
+        th phone
+    each val in order  
+        tr
+            td #{val['id']}
+            td #{val['user_id']}
+            td #{val['goods_id']}
+            td #{val['goods_cost']}
+            td #{val['goods_amount']}
+            td #{val['total']}
+            td #{val['time_stamp']}
+            td #{val['user']}
+            td #{val['user_phone']}
+
+            
