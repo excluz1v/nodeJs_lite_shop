@@ -14,4 +14,6 @@ div(class='wrap')
                 div(class='col col-md-8')
                     p #{goods[0]['description']}
                     span(class='success') Цена: #{goods[0]['cost']} RUB
-                    button(class='button button-success add-to-card' data-goods_id=goods[0]['id']) to card
+                    button(class='button button-success add-to-card' data-good_id=goods[0]['id']) to card
+        include nav
+include footer

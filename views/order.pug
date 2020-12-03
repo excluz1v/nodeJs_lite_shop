@@ -1,0 +1,59 @@
+include header.pug
+
+div(class='wrap')
+  div(class='content')
+    header(class='site-header')
+      include site_header_order.pug
+
+    div(class='container')
+      div(class='row')
+        div(class='col col-md-12')
+          h3(class="cart-header") Cart
+          div(class='busket')
+        div(class='col col-md-12')
+          h3 Create order 
+        div(class='col col-md-6')
+          form#shop-order
+            div(class='form-control')
+              label(for='username') Name
+              input(
+                  type='text',
+                  id='username',
+                  placeholder='Enter your name',
+                  )
+            div(class='form-control')
+              label(for='phone') Phone
+              input(
+                  type='text',
+                  id='phone',
+                  placeholder='+77771234567',
+                  )
+            div(class='form-control')
+              label(for='email') Email
+              input(
+                  type='text',
+                  id='email',
+                  placeholder='email@example.com',
+                  )
+            div(class='form-control')
+              label(for='address') Address
+              textarea(
+                  id='address',
+                  placeholder='where are you',
+                  )
+            div(class='form-control')
+              label(for='rule') 
+                input(
+                    type='checkbox',
+                    id='rule',
+                    value='1'
+                    ) 
+                span  Terms and Conditions
+            div(class='form-control text-right')
+              button(class='button-primary' type='submit') Finish order
+    //include nav.pug
+
+  include footer.pug
+  script(src='order.js')
+  script(src='https://unpkg.com/sweetalert/dist/sweetalert.min.js')
+
