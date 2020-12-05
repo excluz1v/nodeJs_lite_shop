@@ -8,12 +8,21 @@ let con = mysql.createConnection({
     database: 'market'
 })
 const nodemailer = require('nodemailer')
+let cookieParser = require('cookie-parser')
+let aunthenticator = require('./authenticator')
+
 app.use(express.static('public'))
 app.use(express.urlencoded())
+app.use(cookieParser())
 app.set('view engine', 'pug')
 
 app.use(express.json())
-
+app.use(function (req, res, next) {
+    if (req.originalUrl == '/admin', req.originalUrl == '/admin-order') {
+        aunthenticator(req, res, con, next)
+    }
+    else next()
+})
 
 
 app.listen(3000, function () {
@@ -184,6 +193,7 @@ function saveOrder(data, result) {
 
 app.get('/admin', (req, res) => {
     res.render('admin', {})
+
 })
 app.get('/admin-order', (req, res) => {
     con.query(`SELECT
@@ -203,6 +213,7 @@ app.get('/admin-order', (req, res) => {
         if (error) throw error
         res.render('admin-order', { order: JSON.parse(JSON.stringify(result)) })
     })
+
 })
 app.get('/login', (req, res) => {
     res.render('login', {})
@@ -213,17 +224,18 @@ app.post('/login', (req, res) => {
             if (error) throw (error)
             if (result.length !== 0) {
                 res.cookie('login', 'password')
+                res.cookie('id', '1')
+                res.cookie('hash', '1234')
                 result = JSON.parse(JSON.stringify(result))
                 let sql = `UPDATE admins SET hash="1234" WHERE id= ${result[0]["id"]}`
                 con.query(sql, (error, resultQuery) => {
                     if (error) throw error
+                    console.log("qq")
                     res.redirect('/admin')
                 })
-
             } else {
                 console.log('wrong user')
                 res.redirect('/login')
             }
         })
-
 })

@@ -2,8 +2,8 @@ function sendLogin() {
     fetch('/login', {
         method: 'POST',
         body: JSON.stringify({
-            login: document.querySelector('#login').value,
-            password: document.querySelector('#password').value
+            "login": document.querySelector('#login').value,
+            "password": document.querySelector('#password').value
         }),
         headers: {
             'Accept': 'application/json',
@@ -13,6 +13,6 @@ function sendLogin() {
 }
 
 document.querySelector('.form').onsubmit = (event) => {
-    event.preventDefault()
+    // event.preventDefault()
     sendLogin()
 }
