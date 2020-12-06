@@ -31,7 +31,7 @@ app.listen(3000, function () {
 
 app.get('/', (req, res) => {
     let cat = new Promise((resolve, reject) => {
-        con.query("select id,name, cost, image, category from (select id,name,cost,image,category, if(if(@curr_category != category, @curr_category := category, '') != '', @k := 0, @k := @k + 1) as ind   from goods, ( select @curr_category := '' ) v ) goods where ind < 3", function (error, result, field) {
+        con.query("select id,name, cost, image,slug, category from (select id,name,cost,image, slug,category, if(if(@curr_category != category, @curr_category := category, '') != '', @k := 0, @k := @k + 1) as ind   from goods, ( select @curr_category := '' ) v ) goods where ind < 3", function (error, result, field) {
             if (error) return reject(error)
             resolve(result)
         })
@@ -74,10 +74,17 @@ app.get('/cat', (req, res) => {
         })
     })
 })
-app.get('/goods', (req, res) => {
-    con.query('SELECT * FROM goods WHERE id=' + req.query.id, (error, result) => {
+app.get('/goods/*', (req, res) => {
+    con.query('SELECT * FROM goods WHERE slug=' + `'${req.params['0']}'`, (error, result) => {
         if (error) throw error
-        res.render('goods', { goods: JSON.parse(JSON.stringify(result)) })
+        console.log(result)
+        result = JSON.parse(JSON.stringify(result))
+        con.query(`SELECT * FROM images WHERE goods_id=${result['0']['id']}`, (error, images) => {
+            if (error) throw error
+            console.log(images)
+            images = JSON.parse(JSON.stringify(images))
+            res.render('goods', { goods: result, images: images })
+        })
     })
 }
 )
@@ -85,6 +92,7 @@ app.post('/get-category-list', (req, res) => {
     con.query('SELECT id, category FROM category', (error, result) => {
         if (error) throw error
         res.json(result)
+
     })
 }
 )

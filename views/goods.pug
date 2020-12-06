@@ -9,8 +9,13 @@ div(class='wrap')
                 div(class='col col-md-12')
                     h2(class='panel-title') #{goods[0]['name']}
                 div(class='col col-md-4')
-                    img(src='images/'+goods[0]['image']
+                    img(src='/images/'+goods[0]['image']
                     class='goods-bg-image')
+                    .row
+                        each val, index in images
+                            .col.col-md-6
+                                img(class='goods-little-image'
+                                src='/images/'+val['path'])
                 div(class='col col-md-8')
                     p #{goods[0]['description']}
                     span(class='success') Цена: #{goods[0]['cost']} RUB
